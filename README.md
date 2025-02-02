@@ -64,7 +64,7 @@ cd bash-html
 PATH=$PWD/bin:$PATH
 ```
 
-Now you will have access to every commend in the [`./bin`](/bin) directory.
+Now you will have access to every command in the [`./bin`](/bin) directory.
 
 License
 -------
