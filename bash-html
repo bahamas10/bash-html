@@ -1,0 +1,63 @@
+#!/usr/bin/env bash
+#
+# Create HTML using programs on the command line
+#
+# DISCLAIMER: This program is not meant to be used by anyone at anytime for any
+# reason. There is no warranty and no reason anyone should even think this is a
+# good idea to run.
+#
+# This program is intended to be invoked as a symlink/hardlink with the name of
+# the program being an HTML tag, for example:
+#
+# ```
+# $ ln -s ./bash-html p
+# $ p "hello $USER"
+# <p>
+#	hello dave
+# </p>
+# ```
+#
+# This program works in 2 modes:
+# 1. argument mode - if an argument is given the program will escape it as HTML
+#    and use it as the content portion of the tag.
+# 2. stdin mode - if no argument is given the program will add the tags (and
+#    indent) around the stdin in given *without* escaping anything.
+#
+# Author: Dave Eddy <dave@daveeddy.com>
+# Date: February 01, 2025
+# License: MIT
+
+# figure out how we were called
+prog=${0##*/}
+[[ -n $prog ]] || exit 1
+
+# take a string and HTML escape it
+escape-html() {
+	local s=$1
+	s=${s//'&'/\&amp;}
+	s=${s//'>'/\&gt;}
+	s=${s//'<'/\&lt;}
+	s=${s//'"'/\&quot;}
+	s=${s//"'"/\&apos;}
+	echo "$s"
+}
+
+# insert doctype for html
+if [[ $prog == 'html' ]]; then
+	echo '<!doctype html>'
+fi
+
+# we indent the "content" given to us by one-level - this way we can handle
+# being piped without directly detecting if we are being piped.
+echo "<$prog>"
+if [[ -n $1 ]]; then
+	# argument mode - escape the input
+	s=$(escape-html "$*")
+	printf '\t%s\n' "$s"
+else
+	# stdin mode - just indent the given content
+	while IFS= read -r line || [[ -n $line ]]; do
+		printf '\t%s\n' "$line"
+	done
+fi
+echo "</$prog>"

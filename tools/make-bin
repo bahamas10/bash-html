@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+#
+# Create symlinks for the following tags in ./bin
+#
+# Author: Dave Eddy <dave@daveeddy.com>
+# Date: February 01, 2025
+# License: MIT
+
+tags=(
+	html
+	body
+	title
+	style
+	p
+	b
+	div
+	span
+)
+
+mkdir -p bin
+cd bin || exit
+
+for tag in "${tags[@]}"; do
+	echo "linking $tag..."
+	ln -fs ../bash-html "$tag" || exit
+done
