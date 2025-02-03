@@ -7,6 +7,8 @@ is a good idea to run.
 
 Use bash to generate some HTML.
 
+[See it on Instagram](https://www.instagram.com/p/DFl6NBwAt8v/?img_index=1)
+
 Example
 -------
 
