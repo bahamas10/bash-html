@@ -15,6 +15,7 @@ tags=(
 	b
 	div
 	span
+	head
 )
 
 mkdir -p bin
