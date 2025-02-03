@@ -42,9 +42,11 @@ $ cat \
 > | html
 <!doctype html>
 <html>
-	<title>
-		My Website
-	</title>
+	<head>
+		<title>
+			My Website
+		</title>
+	</head>
 	<body>
 		<p>
 			hello dave
